@@ -66,8 +66,12 @@
   <PlatformList version="1.0"/>
   <Group id="776176441" label="GenericCodes" language="Genero">
     <Application binaryName="GenericCodes" id="16663533" label="GenericCodes">
-      <VirtualFolder label="Codes"/>
-      <VirtualFolder label="Forms"/>
+      <VirtualFolder label="Codes">
+        <File filePath="TestCode.4gl"/>
+      </VirtualFolder>
+      <VirtualFolder label="Forms">
+        <File filePath="TestForm.per"/>
+      </VirtualFolder>
     </Application>
   </Group>
 </Project>
