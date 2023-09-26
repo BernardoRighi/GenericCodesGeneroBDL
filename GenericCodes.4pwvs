@@ -4,6 +4,16 @@
     <Node path="GenericCodes.4pw" type="pm/main-project"/>
     <Node path="GenericCodes.4pw/GenericCodes" type="pm/group"/>
     <Node path="GenericCodes.4pw/GenericCodes/GenericCodes" type="pm/application"/>
+    <Node path="GenericCodes.4pw/GenericCodes/GenericCodes/Codes" type="pm/virtual-folder"/>
+    <Node path="GenericCodes.4pw/GenericCodes/GenericCodes/Forms" type="pm/virtual-folder"/>
   </ExpandedNodes>
-  <OpenDocuments/>
+  <OpenDocuments>
+    <Document container="true" filePath="TestCode.4gl" locator="1:1" module="mod-ce3">
+      <Data name="8" value="CP1252"/>
+    </Document>
+    <Document container="true" filePath="TestForm.per" locator="1:1" module="mod-ce3">
+      <Data name="8" value="CP1252"/>
+    </Document>
+  </OpenDocuments>
+  <CurrentDocument filePath="TestForm.per" module="mod-ce3"/>
 </WorkspaceViewState>
