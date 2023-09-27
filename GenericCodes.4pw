@@ -67,7 +67,8 @@
   <Group id="776176441" label="GenericCodes" language="Genero">
     <Application binaryName="GenericCodes" id="16663533" label="GenericCodes">
       <VirtualFolder label="Codes">
-        <File filePath="TestCode.4gl"/>
+        <File filePath="CompareArraysAndRecords.4gl"/>
+        <File filePath="HideElement.4gl"/>
       </VirtualFolder>
       <VirtualFolder label="Forms">
         <File filePath="TestForm.per"/>
