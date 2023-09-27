@@ -6,7 +6,7 @@
 #+ name    = Name of element.
 #+ visible = Indicates whether to show or hide the element.
 #+
-function HideElement(element string, name string, visible integer) returns()
+function hideElement(element string, name string, visible integer) returns()
 
   define XPquery STRING,
          window ui.Window,
