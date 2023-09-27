@@ -8,7 +8,7 @@
 #+
 function hideElement(element string, name string, visible integer) returns()
 
-  define XPquery STRING,
+  define XPquery string,
          window ui.Window,
          node  om.DomNode,
          list  om.NodeList
