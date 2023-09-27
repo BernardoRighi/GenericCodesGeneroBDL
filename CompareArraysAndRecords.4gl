@@ -16,7 +16,7 @@ options short circuit
 #+ true if the two arrays are equal, according to parameters
 #+ false if validation fails, according to parameters
 #+
-function compare_arrays_and_records(first_array om.DomNode, second_array om.DomNode, compares_size boolean, compares_structure boolean, compares_values boolean) returns (boolean)
+function compareArraysAndRecords(first_array om.DomNode, second_array om.DomNode, compares_size boolean, compares_structure boolean, compares_values boolean) returns (boolean)
 
     define l_i, l_j     integer
     define l_node_aux   om.DomNode
