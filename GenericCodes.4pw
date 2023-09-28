@@ -66,12 +66,12 @@
   <PlatformList version="1.0"/>
   <Group id="776176441" label="GenericCodes" language="Genero">
     <Application binaryName="GenericCodes" id="16663533" label="GenericCodes">
-      <VirtualFolder label="Codes">
-        <File filePath="CompareArraysAndRecords.4gl"/>
-        <File filePath="HideElement.4gl"/>
+      <VirtualFolder label="src">
+        <File filePath="scr/CompareArraysAndRecords.4gl"/>
+        <File filePath="scr/HideElement.4gl"/>
       </VirtualFolder>
-      <VirtualFolder label="Forms">
-        <File filePath="TestForm.per"/>
+      <VirtualFolder label="views">
+        <File filePath="views/TestForm.per"/>
       </VirtualFolder>
     </Application>
   </Group>
