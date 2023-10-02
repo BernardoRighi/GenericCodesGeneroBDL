@@ -69,6 +69,7 @@
       <VirtualFolder label="src">
         <File filePath="scr/CompareArraysAndRecords.4gl"/>
         <File filePath="scr/HideElement.4gl"/>
+        <File filePath="scr/IndexArrays.4gl"/>
       </VirtualFolder>
       <VirtualFolder label="views">
         <File filePath="views/TestForm.per"/>
