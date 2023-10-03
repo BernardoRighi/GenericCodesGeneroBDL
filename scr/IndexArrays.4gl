@@ -7,13 +7,13 @@ private type KeyValueLookup record
 end record
 
 #+
-#+ Função para retornar, em um json object (record) uma concatenação do que é chave e do que
-#+   é o restante dos campos. As chaves e os campos desse record são passados por parâmetro.
+#+ Function to return, in a JSON object (record), a concatenation of what is the key and the rest of the fields. 
+#+ The keys and fields of this record are passed as parameters.
 #+
-#+ @param   obj           = JSONObject do record sendo verificado
-#+ @param   attributes_key = Array dos campos que são considerados chave
+#+ @param   obj            = JSON object of the record being checked.
+#+ @param   attributes_key = Array of fields that are considered keys.
 #+
-#+ @return  string  Concatenação dos valores da chave
+#+ @return  string  Concatenation of the key values.
 #+
 private function retornar_strings_chave_e_restante_json_obj(obj util.JSONObject, attributes_key dynamic array of string)
     returns string
@@ -30,13 +30,12 @@ private function retornar_strings_chave_e_restante_json_obj(obj util.JSONObject,
 end function
 
 #+
-#+ Função para retornar, em um json object (record) o valor do campo passado por parâmetro,
-#+   em formato json stringificado
+#+ Function to return, in a JSON object (record), the value of the field passed as a parameter, in JSON string format.
 #+
-#+ @param   obj         = JSONObject sendo verificado
-#+ @param   attribute   = Nome do campo para buscar o valor
+#+ @param   obj         = JSONObject being checked
+#+ @param   attribute   = Field name to retrieve the value.
 #+
-#+ @return  string      Valor desse campo em json stringificado
+#+ @return  string      Value of this field in JSON string format.
 #+
 private function retornar_string_campo_json_obj(props)
     returns (string)
@@ -63,11 +62,11 @@ private function retornar_string_campo_json_obj(props)
 end function
 
 #+
-#+ Função para retornar, em um json object (record) todos seus campos em uma lista
+#+ Function to return in a JSON object (record), all its fields in a list.
 #+
-#+ @param   obj   JSONObject sendo verificado
+#+ @param   obj  = JSONObject being checked
 #+
-#+ @return          Lista de campos desse JSONObject (apenas as "key" do conjunto "key":"value")
+#+ @return       List of fields from this JSONObject(Just the "keys" of the pair "key":"value")
 #+
 private function retornar_todos_campos_json_object(obj util.JSONObject)
   returns (dynamic array of string)
@@ -85,13 +84,13 @@ end function
 
 
 #+
-#+ Funcao que verifica a matriz para encontrar uma ou mais chaves que corresponda ao parâmetro de pesquisa.
+#+ Function that checks the array to find one or more keys that match the search parameter
 #+
-#+ @param   la_arr          = xml do array criado através de um { util.JSONArray.fromFGL(array) }
-#+ @param   lr_valor        = xml do array criado através de um { util.JSONObject.fromFGL(array) }
-#+ @param   l_chave_campos  = Campos separados por ponto-e-vírgula, para que a função identifique o que sera buscado
+#+ @param   arr    = XML representation of the array created through a{ util.JSONArray.fromFGL(array) }
+#+ @param   values = XML representation of the array created through a{ util.JSONObject.fromFGL(array) }
+#+ @param   keys   = Fields separated by semicolons, so the function can identify what will be searched
 #+
-#+ @return  integer  Indice encontrado do array
+#+ @return  integer  Index found in the array.
 #+
 public function findKeyIndex(arr util.JSONArray, values util.JSONObject, keys string)
     returns (integer)
@@ -107,10 +106,9 @@ public function findKeyIndex(arr util.JSONArray, values util.JSONObject, keys st
         return iif(keyValue.error, null, 0)
     end if
 
-    -- INÍCIO
     for i = 1 to arr.getLength()
         if arr.getType(i) <> "OBJECT" then
-            call rot_erro("Array de backup não é do tipo objeto no registro "||i)
+            call rot_erro("Array de backup nÃ£o Ã© do tipo objeto no registro "||i)
             return null
         end if
 
@@ -128,13 +126,13 @@ end function
 
 
 #+
-#+ Funcao que verifica a matriz para encontrar a quantidade de indices com as mesmas chaves que corresponda ao parâmetro de pesquisa.
+#+ Function that checks the array to find the number of indices with the same keys that match the search parameter.
 #+
-#+ @param   la_arr          = xml do array criado através de um { util.JSONArray.fromFGL(array) }
-#+ @param   lr_valor        = xml do array criado através de um { util.JSONObject.fromFGL(array) }
-#+ @param   l_chave_campos  = Campos separados por ponto-e-vírgula, para que a função identifique o que sera buscado
+#+ @param   arr    = XML representation of the array created through a { util.JSONArray.fromFGL(array) }
+#+ @param   values = XML representation of the array created through a { util.JSONObject.fromFGL(array) }
+#+ @param   keys   = Fields separated by semicolons, so the function can identify what will be searched
 #+
-#+ @return  integer  Quantidade de indices encontrados do array
+#+ @return  integer  Number of indices found in the array
 #+
 public function countKeyOccurrencesInArray(la_arr util.JSONArray, values util.JSONObject, keys string)
     returns (integer)
@@ -147,19 +145,19 @@ public function countKeyOccurrencesInArray(la_arr util.JSONArray, values util.JS
 
     whenever any error stop
 
-    if not keyValue.fillKeyValue(la_arr, values, keys) then
+    if not keyValue.fillKeyValue(arr, values, keys) then
         return iif(keyValue.error, null, 0)
     end if
 
     let keyOccurrencesCount = 0
 
-    for i = 1 to la_arr.getLength()
-        if la_arr.getType(i) <> "OBJECT" then
-            error "Array não é do tipo objeto no registro "||i
+    for i = 1 to arr.getLength()
+        if arr.getType(i) <> "OBJECT" then
+            error "The array is not of object type in the record "||i
             return null
         end if
 
-        call retornar_strings_chave_e_restante_json_obj(la_arr.get(i), keyValue.keys)
+        call retornar_strings_chave_e_restante_json_obj(arr.get(i), keyValue.keys)
             returning content
 
         if content = keyValue.values then
@@ -173,7 +171,7 @@ end function
 
 
 #+
-#+ Função que valida os arrays para criar os parametros necessarios para validar os indices do array
+#+ Function that validates arrays to create the necessary parameters for validating array indices.
 #+
 private function (keyValue KeyValueLookup) fillKeyValue(arr util.JSONArray, values util.JSONObject, keys string) returns(boolean)
 
@@ -203,12 +201,12 @@ private function (keyValue KeyValueLookup) fillKeyValue(arr util.JSONArray, valu
         let keyValue.keys = string_to_array_separador(keys, ";")
     end if
 
-    -- Verifica se todas as chaves passadas realmente estão na estrutura (colunas) dos arrays
+    -- Checks if all the keys passed are actually in the structure (columns) of the arrays.
     for i = 1 to keyValue.keys.getLength()
         if (lengthArray > 0 and
             attributesArr.search(null, keyValue.keys[i]) < 1) or
            (attributesValues.search(null, keyValue.keys[i]) < 1) then
-            error "Chave "||keyValue.keys[i]||" não encontrada na estrutura"
+            error "Key "||keyValue.keys[i]||" not found in the structure."
             let keyValue.error = true
             return false
         end if
