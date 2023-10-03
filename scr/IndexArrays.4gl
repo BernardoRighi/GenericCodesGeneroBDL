@@ -108,7 +108,7 @@ public function findKeyIndex(arr util.JSONArray, values util.JSONObject, keys st
 
     for i = 1 to arr.getLength()
         if arr.getType(i) <> "OBJECT" then
-            call rot_erro("Array de backup não é do tipo objeto no registro "||i)
+            call rot_erro("The array is not of object type in the record "||i)
             return null
         end if
 
