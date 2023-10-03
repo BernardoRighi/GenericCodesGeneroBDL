@@ -15,14 +15,14 @@ end record
 #+
 #+ @return  string  Concatenation of the key values.
 #+
-private function retornar_strings_chave_e_restante_json_obj(obj util.JSONObject, attributes_key dynamic array of string)
+private function getConcatenatedKeyValuesJsonObject(obj util.JSONObject, attributes_key dynamic array of string)
     returns string
 
     define i smallint,
            key string = null
 
     for i = 1 to attributes_key.getLength()
-        let key = key, iif(key is not null, "|", ""), retornar_string_campo_json_obj(obj, attributes_key[i])
+        let key = key, iif(key is not null, "|", ""), getJsonFieldAsString(obj, attributes_key[i])
     end for
 
     return key
@@ -37,7 +37,7 @@ end function
 #+
 #+ @return  string      Value of this field in JSON string format.
 #+
-private function retornar_string_campo_json_obj(props)
+private function getJsonFieldAsString(props)
     returns (string)
 
     define props record
@@ -68,7 +68,7 @@ end function
 #+
 #+ @return       List of fields from this JSONObject(Just the "keys" of the pair "key":"value")
 #+
-private function retornar_todos_campos_json_object(obj util.JSONObject)
+private function getAllJsonObjectFields(obj util.JSONObject)
   returns (dynamic array of string)
 
     define i smallint
@@ -112,7 +112,7 @@ public function findKeyIndex(arr util.JSONArray, values util.JSONObject, keys st
             return null
         end if
 
-        call retornar_strings_chave_e_restante_json_obj(arr.get(i), keyValue.keys)
+        call getConcatenatedKeyValuesJsonObject(arr.get(i), keyValue.keys)
             returning content
 
         if content = keyValue.values then
@@ -134,7 +134,7 @@ end function
 #+
 #+ @return  integer  Number of indices found in the array
 #+
-public function countKeyOccurrencesInArray(la_arr util.JSONArray, values util.JSONObject, keys string)
+public function countKeyOccurrences(arr util.JSONArray, values util.JSONObject, keys string)
     returns (integer)
 
     define keyValue KeyValueLookup
@@ -157,7 +157,7 @@ public function countKeyOccurrencesInArray(la_arr util.JSONArray, values util.JS
             return null
         end if
 
-        call retornar_strings_chave_e_restante_json_obj(arr.get(i), keyValue.keys)
+        call getConcatenatedKeyValuesJsonObject(arr.get(i), keyValue.keys)
             returning content
 
         if content = keyValue.values then
@@ -192,8 +192,8 @@ private function (keyValue KeyValueLookup) fillKeyValue(arr util.JSONArray, valu
         return false
     end if
 
-    call retornar_todos_campos_json_object(values) returning attributesValues
-    call retornar_todos_campos_json_object(arr.get(1)) returning attributesArr
+    call getAllJsonObjectFields(values) returning attributesValues
+    call getAllJsonObjectFields(arr.get(1)) returning attributesArr
 
     if keys is null then
         call attributesValues.copyTo(keyValue.keys)
@@ -212,7 +212,7 @@ private function (keyValue KeyValueLookup) fillKeyValue(arr util.JSONArray, valu
         end if
     end for
 
-    call retornar_strings_chave_e_restante_json_obj(values, keyValue.keys)
+    call getConcatenatedKeyValuesJsonObject(values, keyValue.keys)
         returning keyValue.values
 
     return true
