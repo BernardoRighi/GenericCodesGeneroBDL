@@ -68,6 +68,7 @@
     <Application binaryName="GenericCodes" id="16663533" label="GenericCodes">
       <VirtualFolder label="src">
         <File filePath="scr/CompareArraysAndRecords.4gl"/>
+        <File filePath="scr/ConvertArrayOfRecordToString.4gl"/>
         <File filePath="scr/HideElement.4gl"/>
         <File filePath="scr/IndexArrays.4gl"/>
       </VirtualFolder>
