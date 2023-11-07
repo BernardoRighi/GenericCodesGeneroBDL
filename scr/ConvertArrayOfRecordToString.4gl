@@ -19,7 +19,7 @@ public function ConvertArrayOfRecordToString(
 ) returns(string) ## Concatenated string from the array of record, with values separated by the specified separator.
 
     define i integer,
-           positionValueWithSeparator  string,
+           positionValueString  string,
            numberInt integer,
            jsonArray util.JSONArray,
            positionJsonArray util.JSONArray,
@@ -54,7 +54,7 @@ public function ConvertArrayOfRecordToString(
                     properties
                 )
                 let positionJsonArrayString = positionJsonArray.toString()
-                let positionValueWithSeparator = ConvertArrayOfRecordToString(
+                let positionValueString = ConvertArrayOfRecordToString(
                     positionJsonArrayString,
                     separator,
                     properties
@@ -64,7 +64,7 @@ public function ConvertArrayOfRecordToString(
                 ## Call the function again to return the string with the values within the array
                 let positionJsonArray = jsonArray.get(i)
                 let positionJsonArrayString = positionJsonArray.toString()
-                let positionValueWithSeparator = ConvertArrayOfRecordToString(
+                let positionValueString = ConvertArrayOfRecordToString(
                     positionJsonArrayString, 
                     separator,
                     properties
@@ -75,23 +75,23 @@ public function ConvertArrayOfRecordToString(
                 ## if it is integer it will cut the decimal place
                 ## NOTE: Integers are displayed with ".0" which is why this test is necessary
                 if (numberInt := jsonArray.get(i)) = jsonArray.get(i) then
-                    let positionValueWithSeparator = numberInt using "<<<<<<<<<<<<<<<<<<<<<<<<"
+                    let positionValueString = numberInt using "<<<<<<<<<<<<<<<<<<<<<<<<"
                 else
-                    let positionValueWithSeparator = replace_string(",", ".", jsonArray.get(i), 0)
+                    let positionValueString = replace_string(",", ".", jsonArray.get(i), 0)
                 end if
                 
             otherwise ## STRING || BOOLEAN 
-                let positionValueWithSeparator = jsonArray.get(i)
+                let positionValueString = jsonArray.get(i)
         
         end case
 
         ## It will get null here if the object or array is empty
         ## Ex: { employeeId: 1, contacts: [] }
-        ## The "contacts" property will return positionValueWithSeparator = null
+        ## The "contacts" property will return positionValueString = null
         ## Without the test below, in the example above it ends up
         ## the string with the x2 separator -> "1, , "
-        if not positionValueWithSeparator.getLength() then
-            let concatenatedString = concatenatedString, positionValueWithSeparator, separator
+        if not positionValueString.getLength() then
+            let concatenatedString = concatenatedString, positionValueString, separator
         end if
     end for
 
