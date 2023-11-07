@@ -16,7 +16,7 @@ options short circuit
 #+ true if the two arrays are equal, according to parameters
 #+ false if validation fails, according to parameters
 #+
-function compareArraysAndRecords(first_array om.DomNode, second_array om.DomNode, compares_size boolean, compares_structure boolean, compares_values boolean) returns (boolean)
+public function compareArraysAndRecords(first_array om.DomNode, second_array om.DomNode, compares_size boolean, compares_structure boolean, compares_values boolean) returns (boolean)
 
     define i, j       integer
     define node_aux   om.DomNode
@@ -53,7 +53,7 @@ function compareArraysAndRecords(first_array om.DomNode, second_array om.DomNode
                 -- If it's null, it's because it's an internal array, I call the function recursively
                 if node_aux.getChildByIndex(j).getAttribute("type") is null and node_aux2.getChildByIndex(j).getAttribute("type") is null then
                     if node_aux.getChildByIndex(j).getChildCount() > 0 then
-                        return compare_arrays_and_records(node_aux.getChildByIndex(j), node_aux2.getChildByIndex(j), compares_size, compares_structure, compares_values)
+                        return compareArraysAndRecords(node_aux.getChildByIndex(j), node_aux2.getChildByIndex(j), compares_size, compares_structure, compares_values)
                     end if
                 else -- Otherwise I just check the type
                     if not node_aux.getChildByIndex(j).getAttribute("type").equals(node_aux2.getChildByIndex(j).getAttribute("type")) then
@@ -85,7 +85,7 @@ function compareArraysAndRecords(first_array om.DomNode, second_array om.DomNode
                 for j = 1 to node_aux.getChildCount()
                     -- If it's null, it's because it's an internal array, I call the function recursively
                     if node_aux.getChildByIndex(j).getAttribute("value") is null and node_aux2.getChildByIndex(j).getAttribute("value") is null then
-                        return compare_arrays_and_records(node_aux.getChildByIndex(j), node_aux2.getChildByIndex(j),  compares_size, compares_structure, compares_values)
+                        return compareArraysAndRecords(node_aux.getChildByIndex(j), node_aux2.getChildByIndex(j),  compares_size, compares_structure, compares_values)
                     else -- If I don't check directly
                         if not node_aux.getChildByIndex(j).getAttribute("value").equals(node_aux2.getChildByIndex(j).getAttribute("value")) then
                             return false

@@ -7,83 +7,6 @@ private type KeyValueLookup record
 end record
 
 #+
-#+ Function to return, in a JSON object (record), a concatenation of what is the key and the rest of the fields. 
-#+ The keys and fields of this record are passed as parameters.
-#+
-#+ @param   obj            = JSON object of the record being checked.
-#+ @param   attributes_key = Array of fields that are considered keys.
-#+
-#+ @return  string  Concatenation of the key values.
-#+
-private function getConcatenatedKeyValuesJsonObject(obj util.JSONObject, attributes_key dynamic array of string)
-    returns string
-
-    define i smallint,
-           key string = null
-
-    for i = 1 to attributes_key.getLength()
-        let key = key, iif(key is not null, "|", ""), getJsonFieldAsString(obj, attributes_key[i])
-    end for
-
-    return key
-
-end function
-
-#+
-#+ Function to return, in a JSON object (record), the value of the field passed as a parameter, in JSON string format.
-#+
-#+ @param   obj         = JSONObject being checked
-#+ @param   attribute   = Field name to retrieve the value.
-#+
-#+ @return  string      Value of this field in JSON string format.
-#+
-private function getJsonFieldAsString(props)
-    returns (string)
-
-    define props record
-        obj util.JSONObject,
-        attribute string
-    end record
-
-    define obj util.JSONObject,
-           arr util.JSONArray
-
-    case props.obj.getType(props.attribute)
-        when "OBJECT"
-            let obj = props.obj.get(props.attribute)
-            return obj.toString()
-        when "ARRAY"
-            let arr = props.obj.get(props.attribute)
-            return arr.toString()
-        otherwise
-            return props.obj.get(props.attribute)
-    end case
-
-end function
-
-#+
-#+ Function to return in a JSON object (record), all its fields in a list.
-#+
-#+ @param   obj  = JSONObject being checked
-#+
-#+ @return       List of fields from this JSONObject(Just the "keys" of the pair "key":"value")
-#+
-private function getAllJsonObjectFields(obj util.JSONObject)
-  returns (dynamic array of string)
-
-    define i smallint
-    define attributes dynamic array of string
-
-    for i = 1 to obj.getLength()
-        let attributes[i] = obj.name(i)
-    end for
-
-    return attributes
-
-end function
-
-
-#+
 #+ Function that checks the array to find one or more keys that match the search parameter
 #+
 #+ @param   arr    = XML representation of the array created through a{ util.JSONArray.fromFGL(array) }
@@ -169,6 +92,81 @@ public function countKeyOccurrences(arr util.JSONArray, values util.JSONObject, 
 
 end function
 
+#+
+#+ Function to return, in a JSON object (record), a concatenation of what is the key and the rest of the fields. 
+#+ The keys and fields of this record are passed as parameters.
+#+
+#+ @param   obj            = JSON object of the record being checked.
+#+ @param   attributes_key = Array of fields that are considered keys.
+#+
+#+ @return  string  Concatenation of the key values.
+#+
+private function getConcatenatedKeyValuesJsonObject(obj util.JSONObject, attributes_key dynamic array of string)
+    returns string
+
+    define i smallint,
+           key string = null
+
+    for i = 1 to attributes_key.getLength()
+        let key = key, iif(key is not null, "|", ""), getJsonFieldAsString(obj, attributes_key[i])
+    end for
+
+    return key
+
+end function
+
+#+
+#+ Function to return, in a JSON object (record), the value of the field passed as a parameter, in JSON string format.
+#+
+#+ @param   obj         = JSONObject being checked
+#+ @param   attribute   = Field name to retrieve the value.
+#+
+#+ @return  string      Value of this field in JSON string format.
+#+
+private function getJsonFieldAsString(props)
+    returns (string)
+
+    define props record
+        obj util.JSONObject,
+        attribute string
+    end record
+
+    define obj util.JSONObject,
+           arr util.JSONArray
+
+    case props.obj.getType(props.attribute)
+        when "OBJECT"
+            let obj = props.obj.get(props.attribute)
+            return obj.toString()
+        when "ARRAY"
+            let arr = props.obj.get(props.attribute)
+            return arr.toString()
+        otherwise
+            return props.obj.get(props.attribute)
+    end case
+
+end function
+
+#+
+#+ Function to return in a JSON object (record), all its fields in a list.
+#+
+#+ @param   obj  = JSONObject being checked
+#+
+#+ @return       List of fields from this JSONObject(Just the "keys" of the pair "key":"value")
+#+
+private function getAllJsonObjectFields(obj util.JSONObject)
+  returns (dynamic array of string)
+
+    define i smallint
+    define attributes dynamic array of string
+
+    for i = 1 to obj.getLength()
+        let attributes[i] = obj.name(i)
+    end for
+
+    return attributes
+
+end function
 
 #+
 #+ Function that validates arrays to create the necessary parameters for validating array indices.

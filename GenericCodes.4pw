@@ -67,10 +67,16 @@
   <Group id="776176441" label="GenericCodes" language="Genero">
     <Application binaryName="GenericCodes" id="16663533" label="GenericCodes">
       <VirtualFolder label="src">
-        <File filePath="scr/CompareArraysAndRecords.4gl"/>
-        <File filePath="scr/ConvertArrayOfRecordToString.4gl"/>
-        <File filePath="scr/HideElement.4gl"/>
-        <File filePath="scr/IndexArrays.4gl"/>
+        <VirtualFolder label="arrays">
+          <File filePath="scr/CompareArraysAndRecords.4gl"/>
+          <File filePath="scr/IndexArrays.4gl"/>
+        </VirtualFolder>
+        <VirtualFolder label="dom-node">
+          <File filePath="scr/HideElement.4gl"/>
+        </VirtualFolder>
+        <VirtualFolder label="string">
+          <File filePath="scr/ArrayOfRecordToString.4gl"/>
+        </VirtualFolder>
       </VirtualFolder>
       <VirtualFolder label="views">
         <File filePath="views/TestForm.per"/>

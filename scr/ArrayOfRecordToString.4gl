@@ -77,7 +77,7 @@ public function ConvertArrayOfRecordToString(
                 if (numberInt := jsonArray.get(i)) = jsonArray.get(i) then
                     let positionValueString = numberInt using "<<<<<<<<<<<<<<<<<<<<<<<<"
                 else
-                    let positionValueString = replace_string(",", ".", jsonArray.get(i), 0)
+                    let positionValueString = jsonArray.get(i)
                 end if
                 
             otherwise ## STRING || BOOLEAN 
@@ -97,6 +97,34 @@ public function ConvertArrayOfRecordToString(
 
     ## Remove the last separator
     return concatenatedString.subString(1, length(concatenatedString) - length(separator))
+
+end function
+
+
+#+
+#+ Splits a string into an array of substrings using a specified delimiter.
+#+
+public function SplitStringToArray(
+    ## string to be split
+    string string, 
+    ## separator used to split the input string into substrings.
+    delimiter string
+) returns (dynamic array of string ) ## An array of substrings extracted from the input string.
+    
+    define stringTokenizer base.StringTokenizer,
+           i integer = 0
+
+    define splitResult dynamic array of string
+
+    whenever any error raise
+
+    let stringTokenizer = base.StringTokenizer.create(string, delimiter)
+   
+    while stringTokenizer.hasMoreTokens()
+        let splitResult[i := i + 1] = stringTokenizer.nextToken()
+    end while
+
+    return splitResult
 
 end function
 
@@ -133,33 +161,5 @@ private function GetValuesByProperties(
     end for
 
     return jsonArray
-
-end function
-
-
-#+
-#+ Splits a string into an array of substrings using a specified separator.
-#+
-private function SplitStringToArray(
-    ## string to be split
-    string string, 
-    ## separator used to split the input string into substrings.
-    separator string
-) returns (dynamic array of string ) ## An array of substrings extracted from the input string.
-    
-    define stringTokenizer base.StringTokenizer,
-           i integer = 0
-
-    define splitResult dynamic array of string
-
-    whenever any error raise
-
-    let stringTokenizer = base.StringTokenizer.create(string, separator)
-   
-    while stringTokenizer.hasMoreTokens()
-        let splitResult[i := i + 1] = stringTokenizer.nextToken()
-    end while
-
-    return splitResult
 
 end function
