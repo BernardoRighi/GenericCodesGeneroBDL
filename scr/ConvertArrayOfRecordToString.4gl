@@ -19,12 +19,13 @@ public function ConvertArrayOfRecordToString(
 ) returns(string) ## Concatenated string from the array of record, with values separated by the specified separator.
 
     define i integer,
-           concatenatedString string = "",
            positionValueWithSeparator  string,
            numberInt integer,
            jsonArray util.JSONArray,
            positionJsonArray util.JSONArray,
            positionJsonArrayString string
+
+    define concatenatedString string = ""
 
     whenever any error raise
 
@@ -147,8 +148,9 @@ private function SplitStringToArray(
 ) returns (dynamic array of string ) ## An array of substrings extracted from the input string.
     
     define stringTokenizer base.StringTokenizer,
-           splitResult dynamic array of string,
            i integer = 0
+
+    define splitResult dynamic array of string
 
     whenever any error raise
 
