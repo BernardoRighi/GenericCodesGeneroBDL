@@ -9,11 +9,11 @@
 function setPropertyByTag(tagname string, property string, value string) returns()
 
     define XPquery string,
-		window ui.Window,
+	window ui.Window,
         node om.DomNode,
         list om.NodeList,
         nodo om.DomNode,
-		i smallint
+	i smallint
 
     try
         let XPquery = "//*[@tag='", tagname clipped, "']"
