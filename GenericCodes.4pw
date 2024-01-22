@@ -73,6 +73,7 @@
         </VirtualFolder>
         <VirtualFolder label="dom-node">
           <File filePath="scr/HideElement.4gl"/>
+          <File filePath="scr/TagProperty.4gl"/>
         </VirtualFolder>
         <VirtualFolder label="string">
           <File filePath="scr/ArrayOfRecordToString.4gl"/>
