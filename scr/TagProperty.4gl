@@ -2,7 +2,7 @@
 #+ Function that hides several elements with the same tag
 #+
 #+ Parameters:
-#+ tagname  = Name of tag (Ex: Table, Label).
+#+ tagname  = Name of tag
 #+ property = Property to be changed(Ex: hidden, value, name)
 #+ value    = New value of tag
 #+
