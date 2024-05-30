@@ -78,6 +78,9 @@
         <VirtualFolder label="string">
           <File filePath="scr/ArrayOfRecordToString.4gl"/>
         </VirtualFolder>
+        <VirtualFolder label="linux">
+          <File filePath="scr/CloseAllProgramms.4gl"/>
+        </VirtualFolder>
       </VirtualFolder>
       <VirtualFolder label="views">
         <File filePath="views/TestForm.per"/>
