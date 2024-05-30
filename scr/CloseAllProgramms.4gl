@@ -14,7 +14,7 @@ FUNCTION closeAllProgramsSystem()
   DEFINE arr_result DYNAMIC ARRAY OF RECORD 
     pid INTEGER,                 
     user_system STRING,      
-    command STRING,              
+    cmd STRING,              
     arg1 STRING,                 
     arg2 STRING                  
   END RECORD 
@@ -38,7 +38,7 @@ FUNCTION closeAllProgramsSystem()
 
     LET arr_result[l_i].pid = l_tok.nextToken()
     LET arr_result[l_i].user_system = l_tok.nextToken()
-    LET arr_result[l_i].command = l_tok.nextToken()
+    LET arr_result[l_i].cmd = l_tok.nextToken()
     LET arr_result[l_i].arg1 = l_tok.nextToken()
     LET arr_result[l_i].arg2 = l_tok.nextToken()
    
