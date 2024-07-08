@@ -29,7 +29,7 @@ PUBLIC FUNCTION checkIsEmailValid(p_email STRING) RETURNS BOOLEAN
   END IF 
 
   -- Define the regex pattern to validate the email
-  LET regex_pattern = "^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$"
+  LET regex_pattern = "^[a-zA-Z0-9._%+-]+(?<!\\.)@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.[a-zA-Z]{2,}$"
 
   -- Compile the regex pattern into a pattern
   LET p = Pattern.compile(regex_pattern)
