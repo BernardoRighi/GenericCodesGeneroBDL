@@ -5,9 +5,7 @@ import util
 #+
 public function teste() returns()
 
-    whenever any error call erro_cont
-
-    call criar_formulario_tabela('cmanot')
+    call criar_formulario_tabela('users')
 
 end function
 
@@ -185,8 +183,6 @@ function retorna_json_fields(l_tabela string) returns(util.JSONObject)
     define l_i integer
 
     define l_json util.JSONObject
-
-    whenever any error call erro_cont
 
     call base.SqlHandle.create() returning l_sql
 
