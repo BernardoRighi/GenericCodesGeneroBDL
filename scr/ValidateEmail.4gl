@@ -1,6 +1,18 @@
 IMPORT JAVA java.util.regex.Pattern
 IMPORT JAVA java.util.regex.Matcher
 
+MAIN
+
+  DEFINE email STRING
+
+  LET email = "teste@teste.com"
+
+  IF NOT checkIsEmailValid(email) THEN
+    DISPLAY %"Invalid e-mail"
+  END IF
+
+END MAIN
+
 #+ Checks if email is valied
 PUBLIC FUNCTION checkIsEmailValid(p_email STRING) RETURNS BOOLEAN
 
