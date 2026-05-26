@@ -74,6 +74,11 @@
         <VirtualFolder label="dom-node">
           <File filePath="scr/HideElement.4gl"/>
           <File filePath="scr/TagProperty.4gl"/>
+          <File filePath="scr/AnonymizeString.4gl"/>
+          <File filePath="scr/ConvertImagemToBase64.4gl"/>
+          <File filePath="scr/DynamicForms.4gl"/>
+          <File filePath="scr/TranslateStringAPIDeepL.4gl"/>
+          <File filePath="scr/ValidateEmail.4gl"/>
         </VirtualFolder>
         <VirtualFolder label="string">
           <File filePath="scr/ArrayOfRecordToString.4gl"/>
